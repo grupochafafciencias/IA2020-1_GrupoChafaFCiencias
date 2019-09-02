@@ -5,9 +5,11 @@ using UnityEngine;
 public class Actua : MonoBehaviour
 {
 	private Rigidbody rb; 
-    private float speed= 200.0f; 
-	private Vector3 zeroV=new Vector3(0,0,0);
+    private float speed; 
+	private Vector3 zeroV;
     void Start(){
+		speed=98.1f;
+		zeroV=new Vector3(0,0,0);
         rb = GetComponent<Rigidbody>();
     }
     public void Ascender(){

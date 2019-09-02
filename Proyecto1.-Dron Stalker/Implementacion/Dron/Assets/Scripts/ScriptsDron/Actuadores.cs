@@ -8,8 +8,10 @@ public class Actuadores : MonoBehaviour
     private Bateria bateria; 
     private Sensores sensor; 
     private float speed= 98.1f; 
-	public Vector3 zeroV=new Vector3(0,0.2f,0);
+	public Vector3 zeroV;
     void Start(){
+		speed=98.1f;
+		zeroV=new Vector3(0,0.2f,0);
         rb = GetComponent<Rigidbody>();
         sensor = GetComponent<Sensores>();
         bateria = GameObject.Find("Bateria").gameObject.GetComponent<Bateria>();
