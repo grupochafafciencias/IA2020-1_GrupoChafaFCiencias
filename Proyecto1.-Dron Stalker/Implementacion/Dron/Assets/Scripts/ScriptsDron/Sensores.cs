@@ -11,8 +11,6 @@ public class Sensores : MonoBehaviour
     private Actuadores actuador; // Componente adicional (script) para obtener información de los ac
     private bool tocandoPared; // Bandera auxiliar para mantener el estado en caso de tocar pared
     private bool cercaPared; // Bandera auxiliar para mantener el estado en caso de estar cerca de una pared
-    private bool tocandoBasura; // Bandera auxiliar para mantener el estado en caso de tocar basura
-    private bool cercaBasura; // Bandera auxiliar para mantener el estado en caso de estar cerca de una basura
     // Asignaciones de componentes
     void Start(){
         bateria = GameObject.Find("Bateria").gameObject.GetComponent<Bateria>();
@@ -45,56 +43,21 @@ public class Sensores : MonoBehaviour
             tocandoPared = false;
         }
     }
-
-    void OnTriggerEnter(Collider other){
-        if(other.gameObject.CompareTag("Basura")){
-            tocandoBasura = true;
-            basura = other.gameObject;
-        }
-    }
-
-    void OnTriggerStay(Collider other){
-        if(other.gameObject.CompareTag("Basura")){
-            tocandoBasura = true;
-            basura = other.gameObject;
-        }
-    }
-
-    void OnTriggerExit(Collider other){
-        if(other.gameObject.CompareTag("Basura")){
-            tocandoBasura = false;
-        }
-    }
     public bool TocandoPared(){
-        return tocandoPared;
-    }
-    public int CercaDePared(){
+			return tocandoPared;
+	}
+    public List<int> CercaDePared(){
+		List<int> cercaPared=new List<int>();
 		foreach(Radar bar in radaresScripts){
 			int tmp=bar.CercaDePared();
-			if(tmp!=-1)	return tmp;
+			if(tmp!=-1)	cercaPared.Add(tmp);
 		}
-		return -1;
+		return cercaPared;
     }
-    public bool TocandoBasura(){
-        return tocandoBasura;
-    }
-    public int CercaDeBasura(){
-		foreach(Radar bar in radaresScripts){
-			int tmp=bar.CercaDeBasura();
-			if(tmp!=-1)	return tmp;
-		}
-		return -1;
-	}
     public float Bateria(){
         return bateria.NivelDeBateria();
     }
-    public GameObject GetBasura(){
-        return basura;
-    }
     public Vector3 Ubicacion(){
         return transform.position;
-    }
-    public void SetTocandoBasura(bool value){
-        tocandoBasura = value;
     }
 }

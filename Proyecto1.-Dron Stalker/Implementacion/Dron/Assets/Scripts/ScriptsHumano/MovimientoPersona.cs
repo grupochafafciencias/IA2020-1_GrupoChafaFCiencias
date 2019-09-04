@@ -17,5 +17,6 @@ public class MovimientoPersona : MonoBehaviour
         if(Input.GetAxis("Vertical") < 0)actuador.Atras();
         if(Input.GetAxis("Horizontal") > 0)actuador.Derecha();
         if(Input.GetAxis("Horizontal") < 0)actuador.Izquierda();
+        actuador.Flotar();
     }
 }

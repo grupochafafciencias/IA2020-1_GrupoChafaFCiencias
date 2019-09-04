@@ -7,38 +7,40 @@ public class Actuadores : MonoBehaviour
     private Rigidbody rb; 
     private Bateria bateria; 
     private Sensores sensor; 
-    private float speed= 98.1f; 
+    public float speed; 
 	public Vector3 zeroV;
+	private Vector3 velocidad;
     void Start(){
-		speed=98.1f;
+		speed=2.0f;
 		zeroV=new Vector3(0,0.2f,0);
         rb = GetComponent<Rigidbody>();
         sensor = GetComponent<Sensores>();
         bateria = GameObject.Find("Bateria").gameObject.GetComponent<Bateria>();
     }
     public void Ascender(){
-        rb.AddRelativeForce(Vector3.up *speed, ForceMode.Acceleration);
-    }
+   		velocidad+=Vector3.up*speed;
+   	}
     public void Descender(){
-		rb.AddRelativeForce(Vector3.up *-speed, ForceMode.Acceleration);
-    }
+		velocidad+=Vector3.down*speed;
+	}
     public void Flotar(){
-        rb.velocity=zeroV;
+        velocidad+=zeroV;
+        rb.velocity=velocidad;
     }
     public void Adelante(){
-		rb.AddRelativeForce(Vector3.forward*speed, ForceMode.Acceleration);
+		velocidad+=Vector3.forward*speed;
 	}
     public void Atras(){
-		rb.AddRelativeForce(Vector3.forward*-speed, ForceMode.Acceleration);
-    }
+		velocidad+=Vector3.back*speed;
+	}
     public void Derecha(){
-		rb.AddRelativeForce(Vector3.right*speed, ForceMode.Acceleration);
-    }
+		velocidad+=Vector3.right*speed;
+	}
     public void Izquierda(){
-		rb.AddRelativeForce(Vector3.right*-speed,ForceMode.Acceleration);
-    }
+		velocidad+=Vector3.left;
+	}
     public void Detener(){
-        rb.velocity= Vector3.zero;
+        velocidad=Vector3.zero;
     }
     public void CargarBateria(){
         bateria.Cargar();

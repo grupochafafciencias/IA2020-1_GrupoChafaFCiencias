@@ -5,32 +5,38 @@ using UnityEngine;
 public class Actua : MonoBehaviour
 {
 	private Rigidbody rb; 
-    private float speed; 
+    public float speed; 
 	private Vector3 zeroV;
+	private Vector3 velocidad;
     void Start(){
-		speed=98.1f;
-		zeroV=new Vector3(0,0,0);
+		speed=2.0f;
+		zeroV=new Vector3(0,0.2f,0);
         rb = GetComponent<Rigidbody>();
     }
     public void Ascender(){
-        rb.AddRelativeForce(Vector3.up *speed, ForceMode.Acceleration);
+   		velocidad+=Vector3.up*speed;
     }
     public void Descender(){
-		rb.AddRelativeForce(Vector3.up *-speed, ForceMode.Acceleration);
+		velocidad+=Vector3.up*-speed;
     }
     public void Adelante(){
-		rb.AddRelativeForce(Vector3.forward*speed, ForceMode.Acceleration);
+		velocidad+=Vector3.forward*speed;
 	}
     public void Atras(){
-		rb.AddRelativeForce(Vector3.forward*-speed, ForceMode.Acceleration);
+		velocidad+=Vector3.forward*-speed;
     }
     public void Derecha(){
-		rb.AddRelativeForce(Vector3.right*speed, ForceMode.Acceleration);
+		velocidad+=Vector3.right*speed;
     }
     public void Izquierda(){
-		rb.AddRelativeForce(Vector3.right*-speed,ForceMode.Acceleration);
+		velocidad+=Vector3.right*-speed;
     }
     public void Detener(){
         rb.velocity= Vector3.zero;
+        velocidad=Vector3.zero;
+    }
+    public void Flotar(){
+        velocidad+=zeroV;
+        rb.velocity=velocidad;
     }
 }
