@@ -25,6 +25,7 @@ public class Controlador : MonoBehaviour
         sensor = GetComponent<Sensores>();
    		bloqueados=new List<int>();
    		haciaDonde=true;
+        preferencia=false;
     }
     void cambiaVista(){
 			transform.parent=playerObject;
@@ -43,7 +44,7 @@ public class Controlador : MonoBehaviour
 		actuador.Detener();
         diferencias = playerObject.position - transform.position; //Obtiene vector de diferencia entre nuestra posicion y nuestro objetivo.
         if(sensor.TocandoPared()){
-			Debug.Log("Valio merga");
+			Debug.Log("Choco con pared");
 		}
 		seguimientoCiego(diferencias);
 		actuador.Flotar();
@@ -62,7 +63,7 @@ public class Controlador : MonoBehaviour
 				if(bloqueados.Contains(0)){
 					if(!bloqueados.Contains(1)){
 						actuador.Ascender();
-						if(candidateToMute=='y') mute(0,1);
+						if(candidateToMute=='y') mute(1,0);
 						if(lastDequed==1) candidateToMute='y';
 						if(toDeque==0)removeAt(0);
 					}
@@ -75,7 +76,7 @@ public class Controlador : MonoBehaviour
 				if(bloqueados.Contains(5)){
 					if(!bloqueados.Contains(4)){
 						actuador.Izquierda();
-						if(candidateToMute=='x') mute(5,4);
+						if(candidateToMute=='x') mute(4,5);
 						if(lastDequed==5) candidateToMute='x';
 						if(toDeque==5)removeAt(0);
 					}
@@ -88,12 +89,12 @@ public class Controlador : MonoBehaviour
 				if(bloqueados.Contains(3)){
 					if(!bloqueados.Contains(2)){
 						actuador.Atras();
-						if(candidateToMute=='z') mute(3,2);
+						if(candidateToMute=='z') mute(2,3);
 						if(lastDequed==3) candidateToMute='z';
 						if(toDeque==3)removeAt(0);}
 				}else{
 					actuador.Adelante();
-					if(candidateToMute=='z') mute(2,3);
+					if(candidateToMute=='z') mute(3,2);
 					if(lastDequed==2) candidateToMute='z';
 					if(toDeque==2)removeAt(0);
 				}
@@ -123,6 +124,7 @@ public class Controlador : MonoBehaviour
 	void mute(int a, int b){
 			if(!bloqueados.Contains(a))bloqueados.Add(a);
 			if(!bloqueados.Contains(b))bloqueados.Add(b);
+            if(!bloqueados.Contains(b))bloqueados.Add(b);
 	}
 	void evitaMuros(){
 		sensorPared=sensor.CercaDePared();
