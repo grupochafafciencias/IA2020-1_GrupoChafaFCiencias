@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Sensores : MonoBehaviour
 {
-    private GameObject basura; // Auxiliar para guardar referencia al objeto
     public List<GameObject>radares;
     private List<Radar> radaresScripts;
     private Bateria bateria; // Componente adicional (script) que representa la batería

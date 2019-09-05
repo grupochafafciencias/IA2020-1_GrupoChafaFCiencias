@@ -17,6 +17,9 @@ public class Actuadores : MonoBehaviour
         sensor = GetComponent<Sensores>();
         bateria = GameObject.Find("Bateria").gameObject.GetComponent<Bateria>();
     }
+    /**
+     * Va incrementado partes de un vector de velocidad. A excepcion de flotar, por lo que siempre tiene que estar flotando el objeto. 
+     * */
     public void Ascender(){
    		velocidad+=Vector3.up*speed;
    	}
